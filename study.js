@@ -9,5 +9,6 @@ function merge(target, ...sources) {
   return target;
 }
 
+
 console.log(Object.assign({x:1}, {x:2, y:2}, {y:3, z:3}));
 console.log(merge({x:1}, {x:2, y:2}, {y:3, z:3}));
