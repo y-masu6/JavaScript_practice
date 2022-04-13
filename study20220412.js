@@ -80,3 +80,53 @@
   console.log(Number(point));
   console.log(point > 4);
 }
+
+
+/*
+ * 6.9.4　toJSON()メソッド
+ */
+{
+  // Object.prototypeにはtoJSONメソッドは定義されていない
+  // JSON.stringify()メソッドはシリアライズ対象のオブジェクトにtoJSON()メソッドがあるかを調べ、
+  // ある場合はtoJSON()メソッドの戻り値をシリアライズする
+  // 例えば、DataクラスではtoJSON()メソッドを定義しており、シリアライズ可能な日付の文字列を返す
+  
+  let point = {
+    x: 1,
+    y: 2,
+    toString: function() { return `(${this.x}, ${this.y})` },
+    toJSON: function() { return this.toString(); }
+  }
+
+  console.log(JSON.stringify([point]));
+}
+
+
+/*
+ * 6.10　オブジェクトリテラルの拡張構文
+ * 6.10.1　プロパティの簡略記法
+ */
+{
+  let x = 1, y = 2;
+  let o = { x, y }
+  console.log(o.x, o.y);
+}
+
+
+/*
+ * 6.10.2　算出プロパティ名
+ */
+{
+  // 角括弧の中に任意のJavaScript式を記述できる
+  // この式が評価されると評価結果の値がプロパティ名として使用される（必要であれば文字列に変換される） 
+
+  const PROPERTY_NAME = "p1";
+  function computePropertyName() { return "p" + 2; }
+
+  let p = {
+    [PROPERTY_NAME]: 1,
+    [computePropertyName()]: 2
+  };
+
+  console.log(p.p1, p.p2);
+}
